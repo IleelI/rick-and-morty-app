@@ -6,13 +6,13 @@ export type Metadata = {
 };
 
 // Object type that will be returned from API call
-export type ApiResponse<T> = {
+export type ApiPaginatedResponse<T> = {
   info: Metadata;
   results: Array<T>;
 };
 
 // Object type that will be returned from API functions
-export type Response<T> = {
+export type PaginatedResponse<T> = {
   data: Array<T>;
   meta: Metadata;
 };
