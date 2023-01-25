@@ -46,7 +46,9 @@ function CharactersDetailsPage() {
         Object.values(
           episodesWithSeason?.reduce(
             (seasonWithEpisodes, { season, episode }) => {
-              const existing = (seasonWithEpisodes[`season-${season}`] ??= {
+              const existing = ((seasonWithEpisodes as any)[
+                `season-${season}`
+              ] ??= {
                 season,
                 episodes: [],
               });
