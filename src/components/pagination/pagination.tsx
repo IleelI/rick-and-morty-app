@@ -35,8 +35,8 @@ function Pagination({
       <section className="flex justify-center items-center gap-8">
         <button
           type="button"
-          className="font-medium underline underline-offset-4"
           disabled={!hasPrevPage}
+          className="font-medium underline underline-offset-4"
           onClick={() => handleGoToPrevPage(hasPrevPage)}
         >
           Prev
@@ -59,8 +59,8 @@ function Pagination({
         </ul>
         <button
           type="button"
-          className="font-medium underline underline-offset-4"
           disabled={!hasNextPage}
+          className="font-medium underline underline-offset-4"
           onClick={() => handleGoToNextPage(hasNextPage)}
         >
           Next

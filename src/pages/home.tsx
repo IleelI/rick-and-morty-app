@@ -1,13 +1,15 @@
 import { useMemo } from 'react';
 import { useQuery } from 'react-query';
+import { Link } from 'react-router-dom';
 import Pagination from '../components/pagination/pagination';
 import Table, { TableColumns } from '../components/table/table';
 import usePagination from '../hooks/usePagination';
 import useSearch from '../hooks/useSearch';
+import { ROUTE_PATHS } from '../router';
 import { getCharacters } from '../services/rickAndMorty/rickAndMorty';
 import { Character } from '../services/rickAndMorty/types';
 
-export default function Home() {
+export default function HomePage() {
   const pagination = usePagination();
   const { search, handleSearchChange } = useSearch({
     callback: () => pagination.setCurrentPage(1),
@@ -47,7 +49,18 @@ export default function Home() {
       {
         key: 'url',
         header: 'Reference',
-        render: ({ name, url }) => <a href={url}>{`${name} reference`}</a>,
+        render: ({ id, name }) => {
+          const label = `${name} refrence link`;
+          const to = ROUTE_PATHS.character.details.replace(
+            ':id',
+            id.toString()
+          );
+          return (
+            <Link aria-label={label} to={to}>
+              {name} reference
+            </Link>
+          );
+        },
       },
     ],
     []
@@ -58,9 +71,7 @@ export default function Home() {
       <h1>Rick and Morty App</h1>
 
       {isLoading ? (
-        <div>
-          <p>Loading</p>
-        </div>
+        <p>Loading</p>
       ) : (
         <article className="flex flex-col gap-8">
           <header>
@@ -69,8 +80,9 @@ export default function Home() {
             <input
               id="name-filter"
               name="name-filter"
+              placeholder="Search for a character"
+              className="bg-gray-800 w-80 rounded-xl px-4 py-2 text-sm text-gray-200 font-medium"
               onChange={handleSearchChange}
-              className="bg-gray-800 rounded-xl px-4 py-2 text-sm text-gray-200 font-medium"
             />
           </header>
 
