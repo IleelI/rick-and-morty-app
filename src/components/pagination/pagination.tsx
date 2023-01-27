@@ -1,18 +1,20 @@
 import clsx from 'clsx';
 import { useMemo } from 'react';
-import usePagination, { getVisiblePage } from '../../hooks/usePagination';
+import usePagination, { getVisiblePage } from '@/hooks/usePagination';
 
 type PaginatinonProps = {
   totalPages: number;
   hasPrevPage: boolean;
   hasNextPage: boolean;
   pagination: ReturnType<typeof usePagination>;
+  isCentered?: boolean;
 };
 function Pagination({
   totalPages,
   hasPrevPage,
   hasNextPage,
   pagination,
+  isCentered = false,
 }: PaginatinonProps) {
   const {
     currentPage,
@@ -31,8 +33,13 @@ function Pagination({
   }
 
   return (
-    <nav className="relative flex justify-center items-center gap-16">
-      <section className="flex justify-center items-center gap-8">
+    <nav className={clsx(['relative w-full flex items-center gap-16'])}>
+      <section
+        className={clsx([
+          'w-full flex items-center gap-8',
+          isCentered ? 'justify-center' : 'justify-between',
+        ])}
+      >
         <button
           type="button"
           disabled={!hasPrevPage}

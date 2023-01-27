@@ -1,13 +1,13 @@
+import Pagination from '@/components/pagination/pagination';
+import Table, { TableColumns } from '@/components/table/table';
+import usePagination from '@/hooks/usePagination';
+import useSearch from '@/hooks/useSearch';
+import { ROUTE_PATHS } from '@/router';
+import { getCharacters } from '@/services/rickAndMorty/rickAndMorty';
+import { Character } from '@/services/rickAndMorty/types';
 import { useMemo } from 'react';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
-import Pagination from '../components/pagination/pagination';
-import Table, { TableColumns } from '../components/table/table';
-import usePagination from '../hooks/usePagination';
-import useSearch from '../hooks/useSearch';
-import { ROUTE_PATHS } from '../router';
-import { getCharacters } from '../services/rickAndMorty/rickAndMorty';
-import { Character } from '../services/rickAndMorty/types';
 
 export default function HomePage() {
   const pagination = usePagination();
@@ -51,7 +51,7 @@ export default function HomePage() {
         header: 'Reference',
         render: ({ id, name }) => {
           const label = `${name} refrence link`;
-          const to = ROUTE_PATHS.character.details.replace(
+          const to = ROUTE_PATHS.CHARACTER.DETAILS.replace(
             ':id',
             id.toString()
           );
@@ -92,6 +92,7 @@ export default function HomePage() {
             emptyText="There are no results"
           />
           <Pagination
+            isCentered
             pagination={pagination}
             totalPages={meta?.pages ?? 0}
             hasPrevPage={Boolean(meta?.prev)}
