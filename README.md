@@ -1,4 +1,4 @@
-# Rick and Morty App
+# Rick and Morty App 🥒
 
 ## App Description
 Simple app made using Rick and Morty Api, React and TailwindCSS.
