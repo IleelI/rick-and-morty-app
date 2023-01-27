@@ -1,14 +1,15 @@
-import { ReactNode } from 'react';
-import { uniqueId } from 'lodash';
+import { ReactNode, useMemo, useState } from 'react';
+import TableBody from './components/table-body/table-body';
+import TableHeader from './components/table-header/table-header';
+import useTableSort from './components/useTableSort';
 
 export type TableColumn<T> = {
   key: keyof T;
   header: string;
   render?: (row: T, column: TableColumn<T>) => ReactNode;
+  disableSort?: boolean;
 };
 export type TableColumns<T> = TableColumn<T>[];
-
-const generateKey = () => uniqueId('key_');
 
 type TableProps<T> = {
   data: T[];
@@ -16,6 +17,30 @@ type TableProps<T> = {
   emptyText: string;
 };
 function Table<T>({ data, columns, emptyText }: TableProps<T>) {
+  const { sortBy, handleSortClick } = useTableSort<T>();
+
+  const sortedData = useMemo(
+    () =>
+      [...data].sort((a, b) => {
+        if (!sortBy?.key) return 0;
+        const direction = sortBy.direction;
+        const aValue = a[sortBy.key];
+        const bValue = b[sortBy.key];
+        switch (direction) {
+          case 'asc': {
+            return aValue < bValue ? -1 : 1;
+          }
+          case 'dsc': {
+            return bValue > aValue ? 1 : -1;
+          }
+          case null: {
+            return 0;
+          }
+        }
+      }),
+    [data, sortBy?.key, sortBy.direction]
+  );
+
   if (!data.length) {
     return (
       <div>
@@ -25,25 +50,8 @@ function Table<T>({ data, columns, emptyText }: TableProps<T>) {
   }
   return (
     <table>
-      <thead>
-        <tr>
-          {columns.map(({ header }) => (
-            <th key={generateKey()}>{header}</th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {data.map((row) => (
-          <tr key={generateKey()}>
-            {columns.map((column) => {
-              const cellValue = column?.render
-                ? column.render(row, column)
-                : String(row[column.key]);
-              return <td key={generateKey()}>{cellValue}</td>;
-            })}
-          </tr>
-        ))}
-      </tbody>
+      <TableHeader columns={columns} handleSortClick={handleSortClick} />
+      <TableBody data={sortedData} columns={columns} />
     </table>
   );
 }

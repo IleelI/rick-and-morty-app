@@ -61,6 +61,7 @@ export default function HomePage() {
             </Link>
           );
         },
+        disableSort: true,
       },
     ],
     []
