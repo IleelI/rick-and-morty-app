@@ -12,6 +12,7 @@ function CharacterEpisodes({ data }: Props) {
     episodesCount,
     episodesLabel,
     pagination,
+    showPagination,
     hasPrevPage,
     hasNextPage,
   } = useCharacterEpisodes(data?.episode);
@@ -19,7 +20,6 @@ function CharacterEpisodes({ data }: Props) {
   return (
     <section className="flex flex-col gap-4">
       <h1 className="text-xl text-gray-100 font-semibold">Appearances</h1>
-
       <div className="flex flex-col gap-1">
         <div className="flex gap-1 items-baseline">
           <h2 className="text-lg">Season {currentSeason.season}</h2>
@@ -34,8 +34,7 @@ function CharacterEpisodes({ data }: Props) {
           })}
         </ul>
       </div>
-
-      {seasonsWithEpisodes.length > 1 && (
+      {showPagination && (
         <Pagination
           hideButtons
           pagination={pagination}

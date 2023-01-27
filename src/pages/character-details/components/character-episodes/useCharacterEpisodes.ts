@@ -19,10 +19,12 @@ export default function useCharacterEpisodes(episodes?: string[]) {
     'Episode',
     's:'
   );
+  const showPagination = episodesCount > 1;
 
   return {
     seasonsWithEpisodes,
     pagination,
+    showPagination,
     hasPrevPage,
     hasNextPage,
     currentSeason,

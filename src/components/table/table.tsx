@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { ReactNode, useMemo, useState } from 'react';
 import TableBody from './components/table-body/table-body';
 import TableHeader from './components/table-header/table-header';
@@ -6,8 +7,8 @@ import useTableSort from './components/useTableSort';
 export type TableColumn<T> = {
   key: keyof T;
   header: string;
-  render?: (row: T, column: TableColumn<T>) => ReactNode;
   disableSort?: boolean;
+  render?: (row: T, column: TableColumn<T>) => ReactNode;
 };
 export type TableColumns<T> = TableColumn<T>[];
 
@@ -15,8 +16,14 @@ type TableProps<T> = {
   data: T[];
   columns: TableColumns<T>;
   emptyText: string;
+  containerClasses?: string;
 };
-function Table<T>({ data, columns, emptyText }: TableProps<T>) {
+function Table<T>({
+  data,
+  columns,
+  emptyText,
+  containerClasses = '',
+}: TableProps<T>) {
   const { sortBy, handleSortClick } = useTableSort<T>();
 
   const sortedData = useMemo(
@@ -40,23 +47,31 @@ function Table<T>({ data, columns, emptyText }: TableProps<T>) {
       }),
     [data, sortBy?.key, sortBy.direction]
   );
+  const hasData = sortedData.length > 0;
 
-  if (!data.length) {
+  if (!hasData) {
     return (
-      <div>
-        <p>{emptyText}</p>
+      <div className="px-4 py-10 text-center text-lg rounded-xl text-gray-400 bg-gray-800">
+        {emptyText}
       </div>
     );
   }
   return (
-    <table className="w-full rounded-xl overflow-hidden bg-gray-800">
-      <TableHeader
-        columns={columns}
-        sortBy={sortBy}
-        handleSortClick={handleSortClick}
-      />
-      <TableBody data={sortedData} columns={columns} />
-    </table>
+    <div
+      className={clsx([
+        containerClasses,
+        'relative rounded-xl overflow-scroll',
+      ])}
+    >
+      <table className="w-full bg-gray-800">
+        <TableHeader
+          columns={columns}
+          sortBy={sortBy}
+          handleSortClick={handleSortClick}
+        />
+        <TableBody data={sortedData} columns={columns} />
+      </table>
+    </div>
   );
 }
 

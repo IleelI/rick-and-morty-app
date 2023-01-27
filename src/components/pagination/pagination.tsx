@@ -1,5 +1,4 @@
 import usePagination from '@/hooks/usePagination';
-import clsx from 'clsx';
 import PaginationButton from './components/pagination-button/pagination-button';
 import PaginationLinks from './components/pagination-links/pagination-links';
 

@@ -25,6 +25,7 @@ export default function HomePage() {
             data={data}
             columns={columns}
             emptyText="There are no results"
+            containerClasses="max-h-[640px]"
           />
           <Pagination
             pagination={pagination}

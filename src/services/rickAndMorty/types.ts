@@ -42,6 +42,7 @@ export type Character = {
     url: string;
   };
 };
+
 export type CharacterFilters = {
   name?: string;
   status?: string;

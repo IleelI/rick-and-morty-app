@@ -15,14 +15,19 @@ export function getSeasonsWithEpisodes(
     )
   );
 
-  const episodesWithSeason = parsedEpisodes.map((episode) => ({
-    episode:
-      episode % SEASON_LENGTH === 0 ? SEASON_LENGTH : episode % SEASON_LENGTH,
-    season:
-      episode % SEASON_LENGTH === 0
-        ? episode / SEASON_LENGTH
-        : Math.floor(episode / SEASON_LENGTH) + 1,
-  }));
+  const episodesWithSeason = parsedEpisodes.map((episode) => {
+    const isFinalEpisode = episode % SEASON_LENGTH === 0;
+    const formattedEpisode = isFinalEpisode
+      ? SEASON_LENGTH
+      : episode % SEASON_LENGTH;
+    const formattedSeason = isFinalEpisode
+      ? episode / SEASON_LENGTH
+      : Math.floor(episode / SEASON_LENGTH) + 1;
+    return {
+      season: formattedSeason,
+      episode: formattedEpisode,
+    };
+  });
 
   const seasonsWithEpisodes: SeasonWithEpisode[] = Object.values(
     episodesWithSeason?.reduce((seasonWithEpisodes, { season, episode }) => {
@@ -34,5 +39,6 @@ export function getSeasonsWithEpisodes(
       return seasonWithEpisodes;
     }, {})
   );
+
   return seasonsWithEpisodes;
 }
