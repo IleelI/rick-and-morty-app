@@ -9,8 +9,8 @@ module.exports = {
       fontFamily: {
         sans: ['Inter', ...defaultTheme.fontFamily.sans],
       },
-      gridTemplateColumns: {
-        characterDetailsGrid: 'max-content 1fr',
+      aspectRatio: {
+        quarter: '4/1',
       },
     },
   },

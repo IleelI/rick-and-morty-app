@@ -1,18 +1,18 @@
 import { RouteObject, createBrowserRouter } from 'react-router-dom';
 import AppLayout from './components/app-layout/app-layout';
-import CharactersDetailsPage from './pages/characterDetails';
-import HomePage from './pages/home';
+import CharactersDetailsPage from './pages/character-details/character-details';
+import HomePage from './pages/home/home';
 
 export const ROUTE_PATHS = {
-  home: '/',
-  character: {
-    details: 'character/:id',
+  HOME: '/',
+  CHARACTER: {
+    DETAILS: 'character/:id',
   },
 };
 
 const routes: RouteObject[] = [
   {
-    path: ROUTE_PATHS.home,
+    path: ROUTE_PATHS.HOME,
     element: <AppLayout />,
     children: [
       {
@@ -20,7 +20,7 @@ const routes: RouteObject[] = [
         element: <HomePage />,
       },
       {
-        path: ROUTE_PATHS.character.details,
+        path: ROUTE_PATHS.CHARACTER.DETAILS,
         element: <CharactersDetailsPage />,
       },
     ],
