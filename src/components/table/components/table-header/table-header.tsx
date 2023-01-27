@@ -41,7 +41,8 @@ export default function TableHeader<T>({
               onKeyDown={(event) => handleKeyDown(event, key, disableSort)}
               onClick={() => (disableSort ? undefined : handleSortClick(key))}
               className={clsx([
-                'sticky top-0 z-10 text-left p-4 outline-none rounded-xl bg-gray-700 transition-colors duration-300',
+                'sticky top-0 z-10 text-left p-4 outline-none bg-gray-700 transition-colors duration-300',
+                'first:rounded-tl-xl last:rounded-tr-xl',
                 'hover:text-blue-300',
                 'focus:text-blue-300',
                 disableSort ? 'cursor-default' : 'cursor-pointer',
