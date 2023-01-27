@@ -17,7 +17,7 @@ export default function HomeToolbar({
           id="name-filter"
           name="name-filter"
           placeholder="Search for a character"
-          className="w-80 px-4 py-3 rounded-xl font-medium text-sm border border-gray-700 text-gray-200 bg-gray-800"
+          className="w-full max-w-sm px-4 py-3 rounded-xl font-medium text-sm border border-gray-700 text-gray-200 bg-gray-800"
           onChange={handleSearchChange}
         />
       </div>
