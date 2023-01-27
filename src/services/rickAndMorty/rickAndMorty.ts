@@ -1,3 +1,4 @@
+import { getCharacterFilters } from './helpers';
 import {
   PaginatedResponse,
   Character,
@@ -7,14 +8,7 @@ import {
 } from './types';
 
 const BASE_URL = 'https://rickandmortyapi.com/api';
-
 const CHARACTERS_BASE_URL = `${BASE_URL}/character`;
-
-const getCharacterFilters = (filters: CharacterFilters) =>
-  Object.entries(filters)
-    .filter(([, value]) => Boolean(value))
-    .map(([key, value]) => `${key}=${value}`)
-    .join('&');
 
 export async function getCharacters({
   page = 1,

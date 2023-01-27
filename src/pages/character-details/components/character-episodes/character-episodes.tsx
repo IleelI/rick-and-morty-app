@@ -37,6 +37,7 @@ function CharacterEpisodes({ data }: Props) {
 
       {seasonsWithEpisodes.length > 1 && (
         <Pagination
+          hideButtons
           pagination={pagination}
           hasPrevPage={hasPrevPage}
           hasNextPage={hasNextPage}

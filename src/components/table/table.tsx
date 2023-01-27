@@ -49,8 +49,12 @@ function Table<T>({ data, columns, emptyText }: TableProps<T>) {
     );
   }
   return (
-    <table>
-      <TableHeader columns={columns} handleSortClick={handleSortClick} />
+    <table className="w-full rounded-xl overflow-hidden bg-gray-800">
+      <TableHeader
+        columns={columns}
+        sortBy={sortBy}
+        handleSortClick={handleSortClick}
+      />
       <TableBody data={sortedData} columns={columns} />
     </table>
   );

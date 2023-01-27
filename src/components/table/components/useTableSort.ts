@@ -1,10 +1,11 @@
 import { useState } from 'react';
 
+export type SortBy<T> = {
+  key: keyof T | null;
+  direction: 'asc' | 'dsc' | null;
+};
 export default function useTableSort<T>() {
-  const [sortBy, setSortBy] = useState<{
-    key: keyof T | null;
-    direction: 'asc' | 'dsc' | null;
-  }>({
+  const [sortBy, setSortBy] = useState<SortBy<T>>({
     key: null,
     direction: null,
   });
@@ -16,8 +17,9 @@ export default function useTableSort<T>() {
           ? 'dsc'
           : null
         : 'asc';
+      const newKey = newDirection !== null ? newSortKey : null;
       return {
-        key: newSortKey,
+        key: newKey,
         direction: newDirection,
       };
     });

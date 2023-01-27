@@ -18,7 +18,7 @@ function CharactersDetailsPage() {
   const showData = !isLoading && !isError;
   return (
     <main className="flex flex-[2] flex-col items-center">
-      <article className="grid grid-cols-1 grid-flow-row gap-8 p-8 w-full max-w-md rounded-xl bg-gray-800">
+      <article className="grid grid-cols-1 grid-flow-row gap-4 p-4 sm:gap-8 sm:p-8 w-full max-w-md rounded-xl bg-gray-800">
         <HomeButton />
         {isLoading && <p>Loading...</p>}
         {showError && (
