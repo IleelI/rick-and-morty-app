@@ -19,7 +19,7 @@ export default function useCharacterEpisodes(episodes?: string[]) {
     'Episode',
     's:'
   );
-  const showPagination = episodesCount > 1;
+  const showPagination = seasonsWithEpisodes.length > 1;
 
   return {
     seasonsWithEpisodes,
