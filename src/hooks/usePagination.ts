@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 
-const INITIAL_PAGE = 1;
+export const INITIAL_PAGE = 1;
 const VISIBLE_PAGES_COUNT = 5;
 
 export function getVisiblePage(currentPage: number, totalPages: number) {
