@@ -57,17 +57,20 @@ function Table<T>({
     );
   }
   return (
-    <div className="overflow-hidden rounded-xl">
-      <div className={clsx([containerClasses, 'relative overflow-scroll'])}>
-        <table className="w-full bg-gray-800">
-          <TableHeader
-            columns={columns}
-            sortBy={sortBy}
-            handleSortClick={handleSortClick}
-          />
-          <TableBody data={sortedData} columns={columns} />
-        </table>
-      </div>
+    <div
+      className={clsx([
+        containerClasses,
+        'relative rounded-xl overflow-scroll',
+      ])}
+    >
+      <table className="w-full bg-gray-800">
+        <TableHeader
+          columns={columns}
+          sortBy={sortBy}
+          handleSortClick={handleSortClick}
+        />
+        <TableBody data={sortedData} columns={columns} />
+      </table>
     </div>
   );
 }
