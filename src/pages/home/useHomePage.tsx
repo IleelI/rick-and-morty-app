@@ -13,7 +13,7 @@ export default function useHomePage() {
   const { search, handleSearchChange } = useSearch({
     callback: () => pagination.setCurrentPage(INITIAL_PAGE),
   });
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isFetching } = useQuery({
     queryFn: () =>
       getCharacters({
         page: pagination.currentPage,
@@ -70,6 +70,7 @@ export default function useHomePage() {
   return {
     columns,
     isLoading,
+    isFetching,
     pagination,
     meta: data?.meta,
     data: data?.data ?? [],

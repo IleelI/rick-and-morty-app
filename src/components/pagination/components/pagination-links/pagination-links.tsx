@@ -1,10 +1,6 @@
-import { getVisiblePage } from '@/hooks/usePagination';
+import { getVisiblePage, INITIAL_PAGE } from '@/hooks/usePagination';
 import { useMemo } from 'react';
 import PaginationLink from '../pagination-link/pagination-link';
-
-function PaginationLinkDivider() {
-  return <li className="cursor-default select-none">...</li>;
-}
 
 type PaginationLinksProps = {
   currentPage: number;
@@ -20,7 +16,7 @@ export default function PaginationLinks({
     () => getVisiblePage(currentPage, totalPages),
     [currentPage, totalPages]
   );
-  const showFirstPage = !visiblePages.includes(1);
+  const showFirstPage = !visiblePages.includes(INITIAL_PAGE);
   const showLastPage = !visiblePages.includes(totalPages);
 
   return (
@@ -28,7 +24,7 @@ export default function PaginationLinks({
       {showFirstPage && (
         <>
           <PaginationLink
-            page={1}
+            page={INITIAL_PAGE}
             currentPage={currentPage}
             totalPages={totalPages}
             handleGoToPage={handleGoToPage}
@@ -58,4 +54,8 @@ export default function PaginationLinks({
       )}
     </ul>
   );
+}
+
+function PaginationLinkDivider() {
+  return <li className="cursor-default select-none">...</li>;
 }
